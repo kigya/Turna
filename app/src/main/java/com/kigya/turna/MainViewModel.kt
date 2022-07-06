@@ -3,6 +3,8 @@ package com.kigya.turna
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import java.sql.Time
+import kotlin.math.absoluteValue
+import kotlin.time.Duration.Companion.milliseconds
 
 const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
 
@@ -19,4 +21,11 @@ class MainViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel(
         Recipe(R.string.sunny_side_up_name, R.string.sunny_side_up_desc, Time(150 * 1000)),
         Recipe(R.string.hard_name, R.string.hard_desc, Time(200 * 1000)),
     )
+
+    val currentDescriptionId: Int
+        get() = recipeBank[currentIndex].descriptionId
+
+    val currentCookTime: Long
+        get() = recipeBank[currentIndex].time.time.milliseconds.inWholeMilliseconds
+
 }
