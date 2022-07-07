@@ -1,33 +1,25 @@
 package com.kigya.turna
 
-import android.app.Activity
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.View
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.kigya.turna.databinding.ActivityMainBinding
-
-const val SHARED_TIMER_KEY = "shared_timer_key"
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val binding by viewBinding(ActivityMainBinding::bind)
     private var currentCookDuration: Long = 0
-    private lateinit var sharedPreferences: SharedPreferences
-
-    private val launcher =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                currentCookDuration = result.data?.getLongExtra(RECIPE_INDEX_MAIN, 0) ?: 0
-            }
-        }
+    private val recipePicker = RecipePicker(
+        activityResultRegistry,
+        this
+    ) { timeValue: Long? ->
+        currentCookDuration = timeValue ?: 0
+        binding.timerTextView.text = currentCookDuration.toString()
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        sharedPreferences = getSharedPreferences(SHARED_TIMER_KEY, MODE_PRIVATE)
-        currentCookDuration = sharedPreferences.getLong(SHARED_TIMER_KEY, 0)
         with(binding) {
             clearButton.setOnClickListener {
                 setOnClickAction(it, false)
@@ -39,10 +31,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 setOnClickAction(it, true)
             }
             chooseModeButton.setOnClickListener {
-                launcher.launch(
-                    RecipeActivity
-                        .newIntent(this@MainActivity)
-                )
+                val intent = RecipeActivity.newIntent(this@MainActivity)
+                recipePicker.pickRecipe(intent)
             }
             timerTextView.text = currentCookDuration.toString()
         }
