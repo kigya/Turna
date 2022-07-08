@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   
-  <a href='https://svgshare.com/s/iwd' ><img src='https://svgshare.com/i/iwd.svg' title='' width="100" heigth-"100"/></a>
+  <a href='https://svgshare.com/s/iwd' ><img src='https://svgshare.com/i/iwd.svg' title='' width=30% heigth=30%/></a>
 
   <h3 align="center">Turna</h3>
 
