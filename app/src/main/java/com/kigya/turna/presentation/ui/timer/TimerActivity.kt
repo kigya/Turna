@@ -47,11 +47,13 @@ class TimerActivity : AppCompatActivity(R.layout.activity_main) {
                 timerViewModel.setTimer(timerViewModel.actualRecipeTimeMillis)
             }
             actionButton.setOnClickListener {
-                setOnClickAction(it, true)
-                if (timerViewModel.isRunning.value) {
-                    timerViewModel.setRunningState(false)
-                } else {
-                    timerViewModel.setRunningState(true)
+                if (timerViewModel.actualRecipeTimeMillis != 0L) {
+                    setOnClickAction(it, true)
+                    if (timerViewModel.isRunning.value) {
+                        timerViewModel.setRunningState(false)
+                    } else {
+                        timerViewModel.setRunningState(true)
+                    }
                 }
             }
             chooseModeButton.setOnClickListener {
@@ -72,6 +74,11 @@ class TimerActivity : AppCompatActivity(R.layout.activity_main) {
             timerViewModel.actualMilliseconds.onEach {
                 setActualMillisToView()
                 if (timerViewModel.actualMilliseconds.value == 0L) {
+                    animatedEggView.progress = 0f
+                }
+                if (timerViewModel.actualMilliseconds.value ==
+                    timerViewModel.actualRecipeTimeMillis
+                ) {
                     animatedEggView.progress = 0f
                 }
             }.launchWhenStarted(lifecycleScope)
@@ -173,6 +180,5 @@ class TimerActivity : AppCompatActivity(R.layout.activity_main) {
         private const val PLAY_BUTTON_DRAWABLE = R.drawable.ic_play_button
         private const val STOP_BUTTON_DRAWABLE = R.drawable.ic_stop_button
     }
-
 
 }

@@ -10,10 +10,18 @@
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" >@color/black_custom</item>
+        <item name="android:statusBarColor">@color/black_custom</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">false</item>
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
+        <item name="android:windowAnimationStyle">@style/WindowAnimations</item>
+    </style>
+
+    <style name="WindowAnimations">
+        <item name="android:activityOpenEnterAnimation">@anim/enter_activity</item>
+        <item name="android:activityOpenExitAnimation">@anim/exit_activity</item>
+        <item name="android:activityCloseEnterAnimation">@anim/enter_activity</item>
+        <item name="android:activityCloseExitAnimation">@anim/exit_activity</item>
     </style>
 </resources>
