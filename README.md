@@ -1,7 +1,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  ![logo_readme](https://user-images.githubusercontent.com/73034324/178031278-edbde49f-4665-497a-950f-fa5d546a0cf0.svg)
+  
   
 
   <h3 align="center">Turna</h3>
