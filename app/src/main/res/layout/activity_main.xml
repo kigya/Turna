@@ -21,19 +21,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_end="16dp" />
 
-    <TextView
-        android:id="@+id/recipe_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/viga"
-        android:textColor="@color/light"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@id/animated_egg_view"
-        app:layout_constraintEnd_toStartOf="@id/end_guideline"
-        app:layout_constraintStart_toEndOf="@id/start_guideline"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="Recipe" />
-
     <com.mikhaellopez.circularprogressbar.CircularProgressBar
         android:id="@+id/circular_progress_bar"
         android:layout_width="200dp"
