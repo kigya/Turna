@@ -6,6 +6,7 @@ import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import by.kirich1409.viewbindingdelegate.ViewBindingPropertyDelegate
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.kigya.turna.R
 import com.kigya.turna.databinding.ActivityMainBinding
@@ -26,6 +27,7 @@ class TimerActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setViewBindingLowConsumptionMode()
 
         with(binding) {
             clearButton.setOnClickListener {
@@ -76,6 +78,10 @@ class TimerActivity : AppCompatActivity(R.layout.activity_main) {
                 updateCurrentTimerProgress()
             }.launchWhenStarted(lifecycleScope)
         }
+    }
+
+    private fun setViewBindingLowConsumptionMode() {
+        ViewBindingPropertyDelegate.strictMode = false
     }
 
     private fun ActivityMainBinding.updateCurrentTimerProgress() {
