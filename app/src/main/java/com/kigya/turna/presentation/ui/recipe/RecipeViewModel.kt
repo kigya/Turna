@@ -7,8 +7,6 @@ import com.kigya.turna.data.model.Recipe
 import java.sql.Time
 import kotlin.time.Duration.Companion.milliseconds
 
-const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
-
 class RecipeViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
     var currentIndex
@@ -26,4 +24,7 @@ class RecipeViewModel(private val savedStateHandle: SavedStateHandle) : ViewMode
     val currentCookTime: Long
         get() = recipeBank[currentIndex].time.time.milliseconds.inWholeMilliseconds
 
+    private companion object {
+        const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
+    }
 }

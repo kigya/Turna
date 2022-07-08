@@ -18,15 +18,10 @@ class TimerActivity : AppCompatActivity(R.layout.activity_main) {
 
     private val binding by viewBinding(ActivityMainBinding::bind)
     private val timerViewModel: TimerViewModel by viewModels()
-
     private val recipePicker = RecipePicker(
         activityResultRegistry,
-        this
-    ) { timeValue: Long? ->
-        timerViewModel.setTimer(timeValue ?: 0)
-        timerViewModel.actualRecipeTimeMillis = timeValue ?: 0
-        setActualMillisToView()
-    }
+        this, performRecipeCallbackAction()
+    )
     private var timer: CountDownTimer? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -85,7 +80,8 @@ class TimerActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun ActivityMainBinding.updateCurrentTimerProgress() {
         circularProgressBar.progress =
-            (timerViewModel.actualRecipeTimeMillis - timerViewModel.actualMilliseconds.value) * 100f / timerViewModel.actualRecipeTimeMillis
+            (timerViewModel.actualRecipeTimeMillis - timerViewModel.actualMilliseconds.value) *
+                    100f / timerViewModel.actualRecipeTimeMillis
     }
 
     private fun clearActualRecipeTimeMillis() {
@@ -172,6 +168,12 @@ class TimerActivity : AppCompatActivity(R.layout.activity_main) {
 
     private fun stopCountDownTimer() {
         timer?.cancel()
+    }
+
+    private fun performRecipeCallbackAction() = { timeValue: Long? ->
+        timerViewModel.setTimer(timeValue ?: 0)
+        timerViewModel.actualRecipeTimeMillis = timeValue ?: 0
+        setActualMillisToView()
     }
 
     private companion object {
