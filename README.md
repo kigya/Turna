@@ -15,4 +15,4 @@
 [CircularProgressBar](https://github.com/lopspower/CircularProgressBar)\
 [Flow](https://github.com/Kotlin/kotlinx.coroutines)\
 [Lottie](https://github.com/airbnb/lottie-android)\
-[ExpandableBottomBar](https://github.com/st235/ExpandableBottomBar)\
+[ExpandableBottomBar](https://github.com/st235/ExpandableBottomBar)
