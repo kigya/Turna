@@ -23,12 +23,12 @@
 
     <com.mikhaellopez.circularprogressbar.CircularProgressBar
         android:id="@+id/circular_progress_bar"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginBottom="200dp"
         app:cpb_background_progressbar_color="@color/light"
         app:cpb_background_progressbar_width="4dp"
-        app:cpb_progress="100"
+        app:cpb_progress="30"
         app:cpb_progress_direction="to_right"
         app:cpb_progress_max="100"
         app:cpb_progressbar_color="@color/husk"
@@ -41,8 +41,8 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/animated_egg_view"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
         android:layout_marginBottom="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -71,7 +71,7 @@
         style="@style/Widget.MaterialComponents.Button"
         android:layout_width="200dp"
         android:layout_height="60dp"
-        android:layout_marginTop="40dp"
+
         android:backgroundTint="@color/black_custom"
         android:fontFamily="@font/viga"
         android:text="@string/choose_mode"
@@ -88,8 +88,7 @@
         android:id="@+id/actions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="32dp"
         app:constraint_referenced_ids="clear_button, action_button, refresh_button"
         app:flow_horizontalBias="0"
         app:flow_horizontalGap="16dp"

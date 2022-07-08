@@ -41,6 +41,7 @@
         android:id="@+id/expandable_bottom_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:elevation="100dp"
         app:exb_backgroundColor="@color/black_custom"
         app:exb_backgroundCornerRadius="25dp"

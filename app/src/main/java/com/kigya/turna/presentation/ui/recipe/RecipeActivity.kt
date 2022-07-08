@@ -1,4 +1,4 @@
-package com.kigya.turna
+package com.kigya.turna.presentation.ui.recipe
 
 import android.app.Activity
 import android.content.Context
@@ -7,7 +7,9 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import by.kirich1409.viewbindingdelegate.viewBinding
-import com.kigya.turna.RecipePicker.Companion.EXTRA_TIME_MILLISECONDS
+import com.kigya.turna.R
+import com.kigya.turna.presentation.common.RecipePicker.Companion.EXTRA_TIME_MILLISECONDS
+import com.kigya.turna.data.model.Recipe
 import com.kigya.turna.databinding.ActivityRecipeBinding
 import github.com.st235.lib_expandablebottombar.Menu
 import github.com.st235.lib_expandablebottombar.MenuItem
@@ -17,7 +19,7 @@ import github.com.st235.lib_expandablebottombar.MenuItemDescriptor
 class RecipeActivity : AppCompatActivity(R.layout.activity_recipe) {
 
     private val binding by viewBinding(ActivityRecipeBinding::bind)
-    private val recipeViewModel: MainViewModel by viewModels()
+    private val recipeViewModel: RecipeViewModel by viewModels()
     private lateinit var recipeBank: List<Recipe>
     private var recipeIndex = 0
 

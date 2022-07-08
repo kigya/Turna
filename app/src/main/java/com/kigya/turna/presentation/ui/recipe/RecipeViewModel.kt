@@ -1,13 +1,15 @@
-package com.kigya.turna
+package com.kigya.turna.presentation.ui.recipe
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.kigya.turna.R
+import com.kigya.turna.data.model.Recipe
 import java.sql.Time
 import kotlin.time.Duration.Companion.milliseconds
 
 const val CURRENT_INDEX_KEY = "CURRENT_INDEX_KEY"
 
-class MainViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
+class RecipeViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
 
     var currentIndex
         get() = savedStateHandle[CURRENT_INDEX_KEY] ?: 0

@@ -1,4 +1,4 @@
-package com.kigya.turna
+package com.kigya.turna.presentation.common
 
 import android.content.Intent
 import androidx.activity.result.ActivityResult
@@ -11,7 +11,6 @@ class RecipePicker(
     lifecycleOwner: LifecycleOwner,
     private val callback: (timeMilliseconds: Long?) -> Unit
 ) {
-
     private val launcher =
         activityResultRegistry.register(
             REGISTRY_KEY,
@@ -20,7 +19,6 @@ class RecipePicker(
         ) { result: ActivityResult ->
             callback(result.data?.getLongExtra(EXTRA_TIME_MILLISECONDS, 0))
         }
-
 
     fun pickRecipe(intent: Intent) {
         launcher.launch(intent)
