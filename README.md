@@ -2,7 +2,7 @@
 <br />
 <div align="center">
   
-  <iframe src='https://svgshare.com/f/iwd' width=100% height=100% ></iframe>
+  <a href='https://svgshare.com/s/iwd' ><img src='https://svgshare.com/i/iwd.svg' title='' /></a>
 
   <h3 align="center">Turna</h3>
 
