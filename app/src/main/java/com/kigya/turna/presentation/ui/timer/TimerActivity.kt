@@ -9,9 +9,9 @@ import androidx.lifecycle.lifecycleScope
 import by.kirich1409.viewbindingdelegate.viewBinding
 import com.kigya.turna.R
 import com.kigya.turna.databinding.ActivityMainBinding
-import com.kigya.turna.launchWhenStarted
 import com.kigya.turna.presentation.common.RecipePicker
 import com.kigya.turna.presentation.ui.recipe.RecipeActivity
+import com.kigya.turna.utils.extensions.launchWhenStarted
 import kotlinx.coroutines.flow.onEach
 
 class TimerActivity : AppCompatActivity(R.layout.activity_main) {
@@ -37,7 +37,7 @@ class TimerActivity : AppCompatActivity(R.layout.activity_main) {
                 setOnClickAction(it, false)
                 restoreStateIfRunning()
                 timerViewModel.setTimer(0)
-                timerViewModel.actualRecipeTimeMillis = 0
+                clearActualRecipeTimeMillis()
                 animatedEggView.pauseAnimation()
             }
             refreshButton.setOnClickListener {
@@ -49,11 +49,8 @@ class TimerActivity : AppCompatActivity(R.layout.activity_main) {
             actionButton.setOnClickListener {
                 if (timerViewModel.actualRecipeTimeMillis != 0L) {
                     setOnClickAction(it, true)
-                    if (timerViewModel.isRunning.value) {
-                        timerViewModel.setRunningState(false)
-                    } else {
-                        timerViewModel.setRunningState(true)
-                    }
+                    if (timerViewModel.isRunning.value) timerViewModel.setRunningState(false)
+                    else timerViewModel.setRunningState(true)
                 }
             }
             chooseModeButton.setOnClickListener {
@@ -63,35 +60,36 @@ class TimerActivity : AppCompatActivity(R.layout.activity_main) {
 
             timerViewModel.isRunning.onEach {
                 if (it) {
-                    startCountDownTimer(timerViewModel.actualMilliseconds.value ?: 0)
+                    startCountDownTimer(timerViewModel.actualMilliseconds.value)
                     animatedEggView.playAnimation()
+                    actionButton.setImageResource(STOP_BUTTON_DRAWABLE)
                 } else {
                     stopCountDownTimer()
                     animatedEggView.pauseAnimation()
+                    actionButton.setImageResource(PLAY_BUTTON_DRAWABLE)
                 }
             }.launchWhenStarted(lifecycleScope)
 
             timerViewModel.actualMilliseconds.onEach {
                 setActualMillisToView()
-                if (timerViewModel.actualMilliseconds.value == 0L) {
-                    animatedEggView.progress = 0f
-                }
-                if (timerViewModel.actualMilliseconds.value ==
+                if (timerViewModel.actualMilliseconds.value == 0L ||
+                    timerViewModel.actualMilliseconds.value ==
                     timerViewModel.actualRecipeTimeMillis
                 ) {
                     animatedEggView.progress = 0f
                 }
+                updateCurrentTimerProgress()
             }.launchWhenStarted(lifecycleScope)
-
-            //circularProgressBar.setProgressWithAnimation(1f, 2000)
-
-            circularProgressBar.onProgressChangeListener = {
-                circularProgressBar.progress =
-                    (timerViewModel.actualRecipeTimeMillis - timerViewModel.actualMilliseconds.value) * 100f /
-                            (timerViewModel.actualRecipeTimeMillis + .1f)
-            }
-
         }
+    }
+
+    private fun ActivityMainBinding.updateCurrentTimerProgress() {
+        circularProgressBar.progress =
+            (timerViewModel.actualRecipeTimeMillis - timerViewModel.actualMilliseconds.value) * 100f / timerViewModel.actualRecipeTimeMillis
+    }
+
+    private fun clearActualRecipeTimeMillis() {
+        timerViewModel.actualRecipeTimeMillis = 0
     }
 
     private fun ActivityMainBinding.restoreStateIfRunning() {
@@ -104,6 +102,7 @@ class TimerActivity : AppCompatActivity(R.layout.activity_main) {
     override fun onResume() {
         super.onResume()
         setActualMillisToView()
+
     }
 
     private fun setActualMillisToView() {
@@ -167,7 +166,6 @@ class TimerActivity : AppCompatActivity(R.layout.activity_main) {
                     binding.timerTextView.text = "Done!"
                     stopCountDownTimer()
                 }
-
             }
         }.start()
     }

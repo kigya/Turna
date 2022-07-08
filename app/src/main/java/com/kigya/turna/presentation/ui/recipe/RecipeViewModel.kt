@@ -23,9 +23,6 @@ class RecipeViewModel(private val savedStateHandle: SavedStateHandle) : ViewMode
         Recipe(R.id.hard, R.string.hard_name, R.string.hard_desc, Time(200 * 1000)),
     )
 
-    val currentDescriptionId: Int
-        get() = recipeBank[currentIndex].descriptionId
-
     val currentCookTime: Long
         get() = recipeBank[currentIndex].time.time.milliseconds.inWholeMilliseconds
 

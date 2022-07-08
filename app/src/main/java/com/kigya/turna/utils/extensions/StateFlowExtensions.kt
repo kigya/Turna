@@ -1,4 +1,4 @@
-package com.kigya.turna
+package com.kigya.turna.utils.extensions
 
 import androidx.lifecycle.LifecycleCoroutineScope
 import kotlinx.coroutines.flow.Flow
