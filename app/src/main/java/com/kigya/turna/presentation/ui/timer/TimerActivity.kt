@@ -3,6 +3,7 @@ package com.kigya.turna.presentation.ui.timer
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -27,7 +28,7 @@ class TimerActivity : AppCompatActivity(R.layout.activity_main) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setViewBindingLowConsumptionMode()
+        ViewBindingPropertyDelegate.strictMode = false
 
         with(binding) {
             clearButton.setOnClickListener {
@@ -78,10 +79,6 @@ class TimerActivity : AppCompatActivity(R.layout.activity_main) {
                 updateCurrentTimerProgress()
             }.launchWhenStarted(lifecycleScope)
         }
-    }
-
-    private fun setViewBindingLowConsumptionMode() {
-        ViewBindingPropertyDelegate.strictMode = false
     }
 
     private fun ActivityMainBinding.updateCurrentTimerProgress() {
@@ -167,6 +164,13 @@ class TimerActivity : AppCompatActivity(R.layout.activity_main) {
                 if (timerViewModel.actualRecipeTimeMillis != 0L) {
                     binding.timerTextView.text = "Done!"
                     stopCountDownTimer()
+                    with(binding) {
+                        animatedEggView.apply {
+                            pauseAnimation()
+                            progress = 0f
+                        }
+                        actionButton.setImageResource(PLAY_BUTTON_DRAWABLE)
+                    }
                 }
             }
         }.start()

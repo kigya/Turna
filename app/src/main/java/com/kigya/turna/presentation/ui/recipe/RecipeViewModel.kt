@@ -14,7 +14,7 @@ class RecipeViewModel(private val savedStateHandle: SavedStateHandle) : ViewMode
         set(value) = savedStateHandle.set(CURRENT_INDEX_KEY, value)
 
     val recipeBank = listOf(
-        Recipe(R.id.easy, R.string.easy_name, R.string.easy_desc, Time(120 * 1000)),
+        Recipe(R.id.easy, R.string.easy_name, R.string.easy_desc, Time(10 * 1000)),
         Recipe(R.id.medium, R.string.medium_name, R.string.medium_desc, Time(150 * 1000)),
         Recipe(R.id.well, R.string.well_name, R.string.well_desc, Time(180 * 1000)),
         Recipe(R.id.sunny, R.string.sunny_side_up_name, R.string.sunny_side_up_desc, Time(150 * 1000)),
